@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mushi.modules.mapper.OauthClientMapper">
+
+  <resultMap id="BaseResultMap" type="org.mushi.modules.model.OauthClient">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="client_id" jdbcType="VARCHAR" property="clientId" />
+    <result column="client_name" jdbcType="VARCHAR" property="clientName" />
+    <result column="client_logo" jdbcType="VARCHAR" property="clientLogo" />
+    <result column="client_type" jdbcType="VARCHAR" property="clientType" />
+    <result column="client_address" jdbcType="VARCHAR" property="clientAddress" />
+    <result column="grant_type" jdbcType="VARCHAR" property="grantType" />
+    <result column="client_secret" jdbcType="VARCHAR" property="clientSecret" />
+    <result column="sync_org" jdbcType="INTEGER" property="syncOrg" />
+    <result column="sync_org_url" jdbcType="VARCHAR" property="syncOrgUrl" />
+    <result column="sync_user" jdbcType="INTEGER" property="syncUser" />
+    <result column="sync_user_url" jdbcType="VARCHAR" property="syncUserUrl" />
+    <result column="sync_algo" jdbcType="INTEGER" property="syncAlgo" />
+    <result column="client_status" jdbcType="INTEGER" property="clientStatus" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="created_time" jdbcType="DATE" property="createdTime" />
+    <result column="updated_time" jdbcType="DATE" property="updatedTime" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    id, client_id, client_name, client_logo, client_type, client_address, grant_type, client_secret, sync_org,
+    sync_org_url, sync_user, sync_user_url, sync_algo, client_status, note, created_time, updated_time
+  </sql>
+
+
+  <select id="findClientByClientId" parameterType="org.mushi.modules.model.OauthClient" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from oauth_client
+    where
+    <if test="clientId != null and clientId != ''">
+      client_id = #{clientId}
+    </if>
+  </select>
+
+</mapper>
